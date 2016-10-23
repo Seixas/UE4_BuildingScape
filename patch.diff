@@ -1,0 +1,331 @@
+From 9ee587c21bc087571ab6678600bd6859b4814b89 Mon Sep 17 00:00:00 2001
+From: Lucas Seixas <seixas.lc@gmail.com>
+Date: Tue, 18 Oct 2016 21:01:59 -0200
+Subject: [PATCH] LM01 Initial Commit .gitgnore for Unreal
+
+---
+ .gitignore                                         | 14 ++++++
+ BuildingScape/BuildingScape.sln                    | 54 ++++++++++++++++++++++
+ BuildingScape/BuildingScape.uproject               | 13 ++++++
+ BuildingScape/Config/DefaultEditor.ini             |  5 ++
+ BuildingScape/Config/DefaultEngine.ini             | 13 ++++++
+ BuildingScape/Config/DefaultGame.ini               |  6 +++
+ BuildingScape/Source/BuildingScape.Target.cs       | 25 ++++++++++
+ .../Source/BuildingScape/BuildingScape.Build.cs    | 21 +++++++++
+ .../Source/BuildingScape/BuildingScape.cpp         |  5 ++
+ BuildingScape/Source/BuildingScape/BuildingScape.h |  6 +++
+ .../Source/BuildingScape/BuildingScapeGameMode.cpp |  8 ++++
+ .../Source/BuildingScape/BuildingScapeGameMode.h   | 19 ++++++++
+ BuildingScape/Source/BuildingScapeEditor.Target.cs | 25 ++++++++++
+ 13 files changed, 214 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 BuildingScape/BuildingScape.sln
+ create mode 100644 BuildingScape/BuildingScape.uproject
+ create mode 100644 BuildingScape/Config/DefaultEditor.ini
+ create mode 100644 BuildingScape/Config/DefaultEngine.ini
+ create mode 100644 BuildingScape/Config/DefaultGame.ini
+ create mode 100644 BuildingScape/Source/BuildingScape.Target.cs
+ create mode 100644 BuildingScape/Source/BuildingScape/BuildingScape.Build.cs
+ create mode 100644 BuildingScape/Source/BuildingScape/BuildingScape.cpp
+ create mode 100644 BuildingScape/Source/BuildingScape/BuildingScape.h
+ create mode 100644 BuildingScape/Source/BuildingScape/BuildingScapeGameMode.cpp
+ create mode 100644 BuildingScape/Source/BuildingScape/BuildingScapeGameMode.h
+ create mode 100644 BuildingScape/Source/BuildingScapeEditor.Target.cs
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..5591351
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,14 @@
++########################
++#Unreal Generated Files#
++########################
++*/Build
++*/Binaries
++*/DerivedDataCache
++*/Intermediate/
++*/Saved
++BuildingScape/Content/StarterContent/
++
++########################
++#  VS Generated Files  #
++########################
++*.VC.db
+\ No newline at end of file
+diff --git a/BuildingScape/BuildingScape.sln b/BuildingScape/BuildingScape.sln
+new file mode 100644
+index 0000000..6b91666
+--- /dev/null
++++ b/BuildingScape/BuildingScape.sln
+@@ -0,0 +1,54 @@
++﻿
++Microsoft Visual Studio Solution File, Format Version 12.00
++# Visual Studio 14
++VisualStudioVersion = 14.0.22310.1
++MinimumVisualStudioVersion = 10.0.40219.1
++Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{486B92ED-D53E-4BF2-A307-4E0BC57D2AB0}"
++EndProject
++Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{AF4E9AE9-2D3A-47E4-A65F-C60074E075FE}"
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{F3697D61-00EC-4F7A-9885-7230B343CFE4}"
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BuildingScape", "Intermediate\ProjectFiles\BuildingScape.vcxproj", "{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}"
++EndProject
++Global
++	GlobalSection(SolutionConfigurationPlatforms) = preSolution
++		DebugGame Editor|Win32 = DebugGame Editor|Win32
++		DebugGame Editor|Win64 = DebugGame Editor|Win64
++		DebugGame|Win32 = DebugGame|Win32
++		DebugGame|Win64 = DebugGame|Win64
++		Development Editor|Win32 = Development Editor|Win32
++		Development Editor|Win64 = Development Editor|Win64
++		Development|Win32 = Development|Win32
++		Development|Win64 = Development|Win64
++		Shipping|Win32 = Shipping|Win32
++		Shipping|Win64 = Shipping|Win64
++	EndGlobalSection
++	GlobalSection(ProjectConfigurationPlatforms) = postSolution
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.DebugGame Editor|Win32.ActiveCfg = DebugGame_Editor|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.DebugGame Editor|Win64.ActiveCfg = DebugGame_Editor|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.DebugGame Editor|Win64.Build.0 = DebugGame_Editor|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.DebugGame|Win32.ActiveCfg = DebugGame_Game|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.DebugGame|Win32.Build.0 = DebugGame_Game|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.DebugGame|Win64.ActiveCfg = DebugGame_Game|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.DebugGame|Win64.Build.0 = DebugGame_Game|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Development Editor|Win32.ActiveCfg = Development_Editor|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Development Editor|Win64.ActiveCfg = Development_Editor|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Development Editor|Win64.Build.0 = Development_Editor|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Development|Win32.ActiveCfg = Development_Game|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Development|Win32.Build.0 = Development_Game|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Development|Win64.ActiveCfg = Development_Game|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Development|Win64.Build.0 = Development_Game|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Shipping|Win32.ActiveCfg = Shipping_Game|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Shipping|Win32.Build.0 = Shipping_Game|Win32
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Shipping|Win64.ActiveCfg = Shipping_Game|x64
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197}.Shipping|Win64.Build.0 = Shipping_Game|x64
++	EndGlobalSection
++	GlobalSection(SolutionProperties) = preSolution
++		HideSolutionNode = FALSE
++	EndGlobalSection
++	GlobalSection(NestedProjects) = preSolution
++		{F3697D61-00EC-4F7A-9885-7230B343CFE4} = {486B92ED-D53E-4BF2-A307-4E0BC57D2AB0}
++		{57B99EBC-96CF-4AD3-8F7A-D5C056BFD197} = {AF4E9AE9-2D3A-47E4-A65F-C60074E075FE}
++	EndGlobalSection
++EndGlobal
+diff --git a/BuildingScape/BuildingScape.uproject b/BuildingScape/BuildingScape.uproject
+new file mode 100644
+index 0000000..676dc71
+--- /dev/null
++++ b/BuildingScape/BuildingScape.uproject
+@@ -0,0 +1,13 @@
++{
++	"FileVersion": 3,
++	"EngineAssociation": "4.13",
++	"Category": "",
++	"Description": "",
++	"Modules": [
++		{
++			"Name": "BuildingScape",
++			"Type": "Runtime",
++			"LoadingPhase": "Default"
++		}
++	]
++}
+\ No newline at end of file
+diff --git a/BuildingScape/Config/DefaultEditor.ini b/BuildingScape/Config/DefaultEditor.ini
+new file mode 100644
+index 0000000..6838df0
+--- /dev/null
++++ b/BuildingScape/Config/DefaultEditor.ini
+@@ -0,0 +1,5 @@
++[EditoronlyBP]
++bAllowClassAndBlueprintPinMatching=true
++bReplaceBlueprintWithClass=true
++bDontLoadBlueprintOutsideEditor=true
++bBlueprintIsNotBlueprintType=true
+diff --git a/BuildingScape/Config/DefaultEngine.ini b/BuildingScape/Config/DefaultEngine.ini
+new file mode 100644
+index 0000000..2a096e9
+--- /dev/null
++++ b/BuildingScape/Config/DefaultEngine.ini
+@@ -0,0 +1,13 @@
++[URL]
++[/Script/EngineSettings.GameMapsSettings]
++EditorStartupMap=/Game/StarterContent/Maps/Minimal_Default
++GameDefaultMap=/Game/StarterContent/Maps/Minimal_Default
++GlobalDefaultGameMode="/Script/BuildingScape.BuildingScapeGameMode"
++
++[/Script/HardwareTargeting.HardwareTargetingSettings]
++TargetedHardwareClass=Desktop
++AppliedTargetedHardwareClass=Desktop
++DefaultGraphicsPerformance=Maximum
++AppliedDefaultGraphicsPerformance=Maximum
++
++
+diff --git a/BuildingScape/Config/DefaultGame.ini b/BuildingScape/Config/DefaultGame.ini
+new file mode 100644
+index 0000000..102d9ca
+--- /dev/null
++++ b/BuildingScape/Config/DefaultGame.ini
+@@ -0,0 +1,6 @@
++[/Script/EngineSettings.GeneralProjectSettings]
++ProjectID=6EF84E3943767795F3E577BB78B42445
++
++[StartupActions]
++bAddPacks=True
++InsertPack=(PackSource="StarterContent.upack,PackName="StarterContent")
+diff --git a/BuildingScape/Source/BuildingScape.Target.cs b/BuildingScape/Source/BuildingScape.Target.cs
+new file mode 100644
+index 0000000..f49ceb0
+--- /dev/null
++++ b/BuildingScape/Source/BuildingScape.Target.cs
+@@ -0,0 +1,25 @@
++// Fill out your copyright notice in the Description page of Project Settings.
++
++using UnrealBuildTool;
++using System.Collections.Generic;
++
++public class BuildingScapeTarget : TargetRules
++{
++	public BuildingScapeTarget(TargetInfo Target)
++	{
++		Type = TargetType.Game;
++	}
++
++	//
++	// TargetRules interface.
++	//
++
++	public override void SetupBinaries(
++		TargetInfo Target,
++		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
++		ref List<string> OutExtraModuleNames
++		)
++	{
++		OutExtraModuleNames.AddRange( new string[] { "BuildingScape" } );
++	}
++}
+diff --git a/BuildingScape/Source/BuildingScape/BuildingScape.Build.cs b/BuildingScape/Source/BuildingScape/BuildingScape.Build.cs
+new file mode 100644
+index 0000000..2295ec7
+--- /dev/null
++++ b/BuildingScape/Source/BuildingScape/BuildingScape.Build.cs
+@@ -0,0 +1,21 @@
++// Fill out your copyright notice in the Description page of Project Settings.
++
++using UnrealBuildTool;
++
++public class BuildingScape : ModuleRules
++{
++	public BuildingScape(TargetInfo Target)
++	{
++		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
++
++		PrivateDependencyModuleNames.AddRange(new string[] {  });
++
++		// Uncomment if you are using Slate UI
++		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
++		
++		// Uncomment if you are using online features
++		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
++
++		// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
++	}
++}
+diff --git a/BuildingScape/Source/BuildingScape/BuildingScape.cpp b/BuildingScape/Source/BuildingScape/BuildingScape.cpp
+new file mode 100644
+index 0000000..3ad24d8
+--- /dev/null
++++ b/BuildingScape/Source/BuildingScape/BuildingScape.cpp
+@@ -0,0 +1,5 @@
++// Fill out your copyright notice in the Description page of Project Settings.
++
++#include "BuildingScape.h"
++
++IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, BuildingScape, "BuildingScape" );
+diff --git a/BuildingScape/Source/BuildingScape/BuildingScape.h b/BuildingScape/Source/BuildingScape/BuildingScape.h
+new file mode 100644
+index 0000000..3d85d22
+--- /dev/null
++++ b/BuildingScape/Source/BuildingScape/BuildingScape.h
+@@ -0,0 +1,6 @@
++// Fill out your copyright notice in the Description page of Project Settings.
++
++#pragma once
++
++#include "Engine.h"
++
+diff --git a/BuildingScape/Source/BuildingScape/BuildingScapeGameMode.cpp b/BuildingScape/Source/BuildingScape/BuildingScapeGameMode.cpp
+new file mode 100644
+index 0000000..03fb94f
+--- /dev/null
++++ b/BuildingScape/Source/BuildingScape/BuildingScapeGameMode.cpp
+@@ -0,0 +1,8 @@
++// Fill out your copyright notice in the Description page of Project Settings.
++
++#include "BuildingScape.h"
++#include "BuildingScapeGameMode.h"
++
++
++
++
+diff --git a/BuildingScape/Source/BuildingScape/BuildingScapeGameMode.h b/BuildingScape/Source/BuildingScape/BuildingScapeGameMode.h
+new file mode 100644
+index 0000000..9c2972c
+--- /dev/null
++++ b/BuildingScape/Source/BuildingScape/BuildingScapeGameMode.h
+@@ -0,0 +1,19 @@
++// Fill out your copyright notice in the Description page of Project Settings.
++
++#pragma once
++
++#include "GameFramework/GameMode.h"
++#include "BuildingScapeGameMode.generated.h"
++
++/**
++ * 
++ */
++UCLASS()
++class BUILDINGSCAPE_API ABuildingScapeGameMode : public AGameMode
++{
++	GENERATED_BODY()
++	
++	
++	
++	
++};
+diff --git a/BuildingScape/Source/BuildingScapeEditor.Target.cs b/BuildingScape/Source/BuildingScapeEditor.Target.cs
+new file mode 100644
+index 0000000..a564915
+--- /dev/null
++++ b/BuildingScape/Source/BuildingScapeEditor.Target.cs
+@@ -0,0 +1,25 @@
++// Fill out your copyright notice in the Description page of Project Settings.
++
++using UnrealBuildTool;
++using System.Collections.Generic;
++
++public class BuildingScapeEditorTarget : TargetRules
++{
++	public BuildingScapeEditorTarget(TargetInfo Target)
++	{
++		Type = TargetType.Editor;
++	}
++
++	//
++	// TargetRules interface.
++	//
++
++	public override void SetupBinaries(
++		TargetInfo Target,
++		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
++		ref List<string> OutExtraModuleNames
++		)
++	{
++		OutExtraModuleNames.AddRange( new string[] { "BuildingScape" } );
++	}
++}
+-- 
+2.8.1.windows.1
+
