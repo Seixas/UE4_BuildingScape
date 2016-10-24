@@ -6,10 +6,13 @@
 */DerivedDataCache
 */Intermediate/
 */Saved
-BuildingScape/Content/StarterContent/
+BuildingScape/Content/StarterContent
+BuildingScape/Content/StarterContent/Textures
+BuildingScape/Content/StarterContent/HDRI
 
 ########################
 #  VS Generated Files  #
 ########################
 *.VC.db
 *.VC.VC.opendb
+*.suo
